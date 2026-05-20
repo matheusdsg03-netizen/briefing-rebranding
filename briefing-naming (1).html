@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing de Naming — Rebranding</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ── CONFIGURAÇÕES EMAILJS ─────────────────────────────
+     Substitua os 3 valores abaixo pelas suas credenciais:
+     PUBLIC_KEY  → Account → API Keys no painel EmailJS
+     SERVICE_ID  → Email Services → seu serviço Gmail
+     TEMPLATE_ID → Email Templates → seu template
+  ───────────────────────────────────────────────────── */
+
+  :root {
+    --public-key: 'BcV2phUqX3Amye0ui';
+    --service-id: 'service_7x68d3o';
+    --template-id: 'i4t3iua';
+
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --text: #1a1a18;
+    --muted: #6b6b65;
+    --border: #e2e0d8;
+    --border-hover: #b8b5aa;
+    --accent: #1a1a18;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .header p {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* Progress */
+  .progress-wrap { margin-bottom: 2.5rem; }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .progress-track {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* Sections */
+  .section { margin-bottom: 2.5rem; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Fields */
+  .field { margin-bottom: 1.5rem; }
+
+  .field > label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    line-height: 1.45;
+    color: var(--text);
+  }
+
+  .field .hint {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .field input[type="text"],
+  .field input[type="email"],
+  .field textarea,
+  .field select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    border-color: var(--text);
+    box-shadow: 0 0 0 3px rgba(26,26,24,0.07);
+  }
+
+  .field textarea {
+    min-height: 90px;
+    resize: vertical;
+    line-height: 1.65;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder { color: #b0aea6; }
+
+  /* Choice options */
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .option-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.12s, border-color 0.12s;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+
+  .option-item:hover {
+    background: #f4f3ef;
+    border-color: var(--border-hover);
+  }
+
+  .option-item input { margin-top: 2px; flex-shrink: 0; accent-color: var(--accent); }
+
+  /* Two columns */
+  .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 500px) { .cols2 { grid-template-columns: 1fr; } }
+
+  /* Client info box */
+  .client-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 500px) { .client-box { grid-template-columns: 1fr; } }
+
+  /* Submit */
+  .submit-area {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .submit-note {
+    font-size: 12px;
+    color: var(--muted);
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  .btn-submit {
+    background: var(--accent);
+    color: #faf9f6;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 12px 28px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: opacity 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-submit:hover { opacity: 0.82; }
+  .btn-submit:active { transform: scale(0.98); }
+  .btn-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text);
+    color: #faf9f6;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 999;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .toast.error { background: #c1440e; }
+
+  /* Required star */
+  .req { color: #c1440e; margin-left: 2px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="header">
+    <p class="header-eyebrow">Briefing — Rebranding</p>
+    <h1>Naming &<br>Posicionamento</h1>
+    <p>Preencha com calma — suas respostas são a base de tudo. Não há resposta certa ou errada, apenas a sua perspectiva mais honesta sobre o negócio.</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span>Progresso</span>
+      <span id="pct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="fill"></div>
+    </div>
+  </div>
+
+  <form id="namingForm" novalidate>
+
+    <!-- Identificação -->
+    <div class="section">
+      <div class="section-label">&#9632; Identificação</div>
+      <div class="client-box">
+        <div class="field">
+          <label>Nome completo <span class="req">*</span></label>
+          <input type="text" name="cliente_nome" placeholder="Seu nome" required>
+        </div>
+        <div class="field">
+          <label>E-mail <span class="req">*</span></label>
+          <input type="email" name="cliente_email" placeholder="seu@email.com" required>
+        </div>
+        <div class="field">
+          <label>Empresa / Projeto</label>
+          <input type="text" name="empresa" placeholder="Nome atual da empresa">
+        </div>
+        <div class="field">
+          <label>Setor / Segmento</label>
+          <input type="text" name="setor" placeholder="Ex: saúde, tecnologia, moda">
+        </div>
+      </div>
+    </div>
+
+    <!-- Sobre o negócio -->
+    <div class="section">
+      <div class="section-label">&#9632; Sobre o negócio</div>
+
+      <div class="field">
+        <label>1. O que a sua empresa faz, de forma simples e direta? <span class="req">*</span></label>
+        <p class="hint">Explique como se fosse para alguém de fora do setor.</p>
+        <textarea name="q1_oque_faz" placeholder="Descreva aqui..." required></textarea>
+      </div>
+
+      <div class="cols2">
+        <div class="field">
+          <label>2. Há quantos anos a empresa existe?</label>
+          <input type="text" name="q2_anos" placeholder="Ex: 3 anos">
+        </div>
+        <div class="field">
+          <label>3. Cidade / Estado de atuação principal</label>
+          <input type="text" name="q3_cidade" placeholder="Ex: São Paulo, SP">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>4. Qual o principal problema que você resolve para o cliente? <span class="req">*</span></label>
+        <textarea name="q4_problema" placeholder="Qual dor ou necessidade você atende?" required></textarea>
+      </div>
+    </div>
+
+    <!-- Posicionamento -->
+    <div class="section">
+      <div class="section-label">&#9632; Posicionamento e público</div>
+
+      <div class="field">
+        <label>5. Quem é seu cliente ideal? <span class="req">*</span></label>
+        <p class="hint">Idade, perfil, hábitos, valores, o que ele lê, onde passa o tempo.</p>
+        <textarea name="q5_cliente" placeholder="Descreva o perfil do cliente que você mais quer atrair..." required></textarea>
+      </div>
+
+      <div class="field">
+        <label>6. Como você descreveria o posicionamento que busca?</label>
+        <div class="options-list">
+          <label class="option-item"><input type="checkbox" name="q6_pos" value="Premium / exclusivo"> Premium / exclusivo</label>
+          <label class="option-item"><input type="checkbox" name="q6_pos" value="Acessível / democrático"> Acessível / democrático</label>
+          <label class="option-item"><input type="checkbox" name="q6_pos" value="Técnico / especialista"> Técnico / especialista</label>
+          <label class="option-item"><input type="checkbox" name="q6_pos" value="Humano / próximo / acolhedor"> Humano / próximo / acolhedor</label>
+          <label class="option-item"><input type="checkbox" name="q6_pos" value="Inovador / disruptivo"> Inovador / disruptivo</label>
+          <label class="option-item"><input type="checkbox" name="q6_pos" value="Tradicional / confiável"> Tradicional / confiável</label>
+        </div>
+        <div style="margin-top:8px;">
+          <input type="text" name="q6_outro" placeholder="Outro (descreva)">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>7. Quais seus 3 principais concorrentes? O que fazem bem — e o que deixam a desejar?</label>
+        <textarea name="q7_concorrentes" placeholder="Concorrente 1: ... &#10;Concorrente 2: ... &#10;Concorrente 3: ..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>8. O que torna sua empresa genuinamente diferente dos concorrentes? <span class="req">*</span></label>
+        <textarea name="q8_diferencial" placeholder="Seja específico. O que só você oferece ou faz de um jeito único?" required></textarea>
+      </div>
+    </div>
+
+    <!-- Personalidade -->
+    <div class="section">
+      <div class="section-label">&#9632; Personalidade e território de nome</div>
+
+      <div class="field">
+        <label>9. Se a sua marca fosse uma pessoa, como ela seria?</label>
+        <p class="hint">Personalidade, jeito de falar, valores. Pode mencionar pessoas reais como referência.</p>
+        <textarea name="q9_persona" placeholder="Ex: seria como uma arquiteta de 38 anos, rigorosa mas apaixonada, que fala direto e inspira confiança..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>10. Qual tipo de nome mais ressoa com a visão da marca?</label>
+        <div class="options-list">
+          <label class="option-item"><input type="radio" name="q10_tipo_nome" value="Nome próprio ou sobrenome (ex: Braun, Tesla)"> Nome próprio ou sobrenome (ex: Braun, Tesla)</label>
+          <label class="option-item"><input type="radio" name="q10_tipo_nome" value="Palavra inventada, sem significado literal (ex: Kodak, Spotify)"> Palavra inventada / sem significado literal (ex: Kodak, Spotify)</label>
+          <label class="option-item"><input type="radio" name="q10_tipo_nome" value="Palavra real com novo contexto (ex: Apple, Amazon)"> Palavra real com novo contexto (ex: Apple, Amazon)</label>
+          <label class="option-item"><input type="radio" name="q10_tipo_nome" value="Sigla ou acrônimo (ex: IBM, FGV)"> Sigla ou acrônimo (ex: IBM, FGV)</label>
+          <label class="option-item"><input type="radio" name="q10_tipo_nome" value="Nome descritivo / funcional (ex: Pão de Açúcar)"> Nome descritivo / funcional (ex: Pão de Açúcar)</label>
+          <label class="option-item"><input type="radio" name="q10_tipo_nome" value="Sem preferência — quero ver opções"> Sem preferência — quero ver opções</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>11. Tem alguma palavra, raiz ou conceito que DEVE ou NÃO pode aparecer no nome?</label>
+        <textarea name="q11_palavras" placeholder="Ex: quero algo ligado a força / não quero nada que remeta a tecnologia..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>12. Em quais idiomas o nome precisa funcionar?</label>
+        <div class="options-list">
+          <label class="option-item"><input type="checkbox" name="q12_idioma" value="Apenas português"> Apenas português</label>
+          <label class="option-item"><input type="checkbox" name="q12_idioma" value="Português + inglês"> Português + inglês</label>
+          <label class="option-item"><input type="checkbox" name="q12_idioma" value="Funcionar globalmente"> Precisamos funcionar globalmente</label>
+          <label class="option-item"><input type="checkbox" name="q12_idioma" value="Sem restrição de idioma"> Sem restrição de idioma</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>13. Existe algum nome de outra marca que você admira? Por quê?</label>
+        <p class="hint">Não precisa ser do mesmo setor.</p>
+        <textarea name="q13_admira" placeholder="Ex: gosto do nome Nubank porque..."></textarea>
+      </div>
+    </div>
+
+    <!-- Visão -->
+    <div class="section">
+      <div class="section-label">&#9632; Visão e futuro</div>
+
+      <div class="field">
+        <label>14. Onde você quer que a empresa esteja daqui a 5 anos?</label>
+        <textarea name="q14_futuro" placeholder="Expansão, novos serviços, volume de clientes, reconhecimento de marca..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>15. Complete: "Quando alguém ouvir o nome da nossa marca, quero que sinta..." <span class="req">*</span></label>
+        <textarea name="q15_sentimento" placeholder="Escreva com liberdade, pode ser emocional..." required></textarea>
+      </div>
+
+      <div class="field">
+        <label>16. Há algo importante que ainda não perguntamos?</label>
+        <textarea name="q16_extra" placeholder="Observações livres..."></textarea>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <p class="submit-note">Suas respostas serão enviadas para o designer responsável pelo projeto.</p>
+      <button type="submit" class="btn-submit" id="submitBtn">
+        Enviar briefing &rarr;
+      </button>
+    </div>
+
+  </form>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ══════════════════════════════════════════════
+  //  SUBSTITUA AQUI SUAS CREDENCIAIS DO EMAILJS
+  // ══════════════════════════════════════════════
+  const EMAILJS_PUBLIC_KEY  = 'BcV2phUqX3Amye0ui';
+  const EMAILJS_SERVICE_ID  = 'service_7x68d3o';
+  const EMAILJS_TEMPLATE_ID = 'i4t3iua';
+  // ══════════════════════════════════════════════
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  // Progress bar
+  const allInputs = document.querySelectorAll('input[required], textarea[required]');
+  const fill = document.getElementById('fill');
+  const pct  = document.getElementById('pct');
+
+  function updateProgress() {
+    let done = 0;
+    allInputs.forEach(i => { if (i.value.trim()) done++; });
+    const p = Math.round((done / allInputs.length) * 100);
+    fill.style.width = p + '%';
+    pct.textContent  = p + '%';
+  }
+
+  document.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+  // Toast helper
+  function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    setTimeout(() => { t.className = 'toast'; }, 4500);
+  }
+
+  // Collect form data into readable message
+  function buildMessage(form) {
+    const fd   = new FormData(form);
+    const lines = [];
+
+    const labels = {
+      cliente_nome: 'Nome do cliente',
+      cliente_email: 'E-mail do cliente',
+      empresa: 'Empresa / Projeto',
+      setor: 'Setor',
+      q1_oque_faz: '1. O que a empresa faz',
+      q2_anos: '2. Tempo de existência',
+      q3_cidade: '3. Cidade / Estado',
+      q4_problema: '4. Problema que resolve',
+      q5_cliente: '5. Cliente ideal',
+      q6_outro: '6. Outro posicionamento',
+      q7_concorrentes: '7. Concorrentes',
+      q8_diferencial: '8. Diferencial',
+      q9_persona: '9. Personalidade da marca',
+      q10_tipo_nome: '10. Tipo de nome',
+      q11_palavras: '11. Palavras a incluir/evitar',
+      q12_idioma: '12. Idiomas',
+      q13_admira: '13. Nomes admirados',
+      q14_futuro: '14. Visão de futuro',
+      q15_sentimento: '15. Sentimento desejado',
+      q16_extra: '16. Observações extras',
+    };
+
+    // Checkboxes with multiple values
+    const multiFields = {};
+    for (const [k, v] of fd.entries()) {
+      if (['q6_pos', 'q12_idioma'].includes(k)) {
+        multiFields[k] = multiFields[k] ? multiFields[k] + ', ' + v : v;
+      }
+    }
+
+    lines.push('══ BRIEFING DE NAMING ══\n');
+
+    for (const [key, label] of Object.entries(labels)) {
+      const val = fd.get(key) || '';
+      if (val.trim()) lines.push(`${label}:\n${val}\n`);
+    }
+
+    if (multiFields.q6_pos)   lines.push(`6. Posicionamento escolhido:\n${multiFields.q6_pos}\n`);
+    if (multiFields.q12_idioma) lines.push(`12. Idiomas selecionados:\n${multiFields.q12_idioma}\n`);
+
+    return lines.join('\n');
+  }
+
+  // Form submit
+  document.getElementById('namingForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const required = this.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(el => {
+      if (!el.value.trim()) { el.style.borderColor = '#c1440e'; valid = false; }
+      else el.style.borderColor = '';
+    });
+
+    if (!valid) {
+      showToast('Preencha os campos obrigatórios marcados com *.', true);
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    const clienteName = this.querySelector('[name="cliente_nome"]').value;
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        subject: `Briefing de Naming — ${clienteName}`,
+        message: buildMessage(this),
+        reply_to: this.querySelector('[name="cliente_email"]').value,
+      });
+
+      showToast('✓ Briefing enviado com sucesso!');
+      btn.textContent = 'Enviado ✓';
+
+      setTimeout(() => {
+        this.reset();
+        btn.disabled = false;
+        btn.innerHTML = 'Enviar briefing &rarr;';
+        fill.style.width = '0%';
+        pct.textContent = '0%';
+      }, 3000);
+
+    } catch (err) {
+      console.error(err);
+      showToast('Erro ao enviar. Verifique suas credenciais EmailJS.', true);
+      btn.disabled = false;
+      btn.innerHTML = 'Tentar novamente &rarr;';
+    }
+  });
+</script>
+</body>
+</html>

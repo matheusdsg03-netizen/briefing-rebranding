@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing de Identidade Visual — Rebranding</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ── CONFIGURAÇÕES EMAILJS ─────────────────────────────
+     Substitua os 3 valores abaixo pelas suas credenciais:
+     PUBLIC_KEY  → Account → API Keys no painel EmailJS
+     SERVICE_ID  → Email Services → seu serviço Gmail
+     TEMPLATE_ID → Email Templates → seu template
+  ───────────────────────────────────────────────────── */
+
+  :root {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --text: #1a1a18;
+    --muted: #6b6b65;
+    --border: #e2e0d8;
+    --border-hover: #b8b5aa;
+    --accent: #1a1a18;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; }
+
+  .header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .header p {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .progress-wrap { margin-bottom: 2.5rem; }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .progress-track { height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; }
+
+  .section { margin-bottom: 2.5rem; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  .field { margin-bottom: 1.5rem; }
+
+  .field > label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    line-height: 1.45;
+    color: var(--text);
+  }
+
+  .field .hint {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .field input[type="text"],
+  .field input[type="email"],
+  .field textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .field input:focus, .field textarea:focus {
+    border-color: var(--text);
+    box-shadow: 0 0 0 3px rgba(26,26,24,0.07);
+  }
+
+  .field textarea { min-height: 90px; resize: vertical; line-height: 1.65; }
+  .field input::placeholder, .field textarea::placeholder { color: #b0aea6; }
+
+  .options-list { display: flex; flex-direction: column; gap: 6px; }
+
+  .option-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.12s, border-color 0.12s;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+
+  .option-item:hover { background: #f4f3ef; border-color: var(--border-hover); }
+  .option-item input { margin-top: 2px; flex-shrink: 0; accent-color: var(--accent); }
+
+  .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 500px) { .cols2 { grid-template-columns: 1fr; } }
+
+  .client-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 500px) { .client-box { grid-template-columns: 1fr; } }
+
+  /* Escala visual */
+  .scale-block { margin-bottom: 1.2rem; }
+  .scale-poles { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .scale-btns { display: flex; gap: 6px; }
+  .scale-btn {
+    flex: 1;
+    padding: 8px 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    color: var(--muted);
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+  }
+  .scale-btn:hover { background: #f4f3ef; border-color: var(--border-hover); }
+  .scale-btn.active { background: var(--accent); color: #faf9f6; border-color: var(--accent); }
+
+  /* Paleta de cores */
+  .color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .color-chip {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.1s, border-color 0.15s;
+    position: relative;
+  }
+
+  .color-chip:hover { transform: scale(1.12); }
+  .color-chip.selected { border-color: var(--accent); }
+  .color-chip.selected::after {
+    content: '✓';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  .submit-area {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .submit-note { font-size: 12px; color: var(--muted); max-width: 280px; line-height: 1.5; }
+
+  .btn-submit {
+    background: var(--accent);
+    color: #faf9f6;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 12px 28px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+
+  .btn-submit:hover { opacity: 0.82; }
+  .btn-submit:active { transform: scale(0.98); }
+  .btn-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text);
+    color: #faf9f6;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 999;
+  }
+
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.error { background: #c1440e; }
+
+  .req { color: #c1440e; margin-left: 2px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="header">
+    <p class="header-eyebrow">Briefing — Rebranding</p>
+    <h1>Identidade<br>Visual</h1>
+    <p>Quanto mais detalhes você compartilhar, mais precisa será a construção da sua marca. Reserve uns 20 minutos para responder com calma.</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span>Progresso</span>
+      <span id="pct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="fill"></div>
+    </div>
+  </div>
+
+  <form id="ivForm" novalidate>
+
+    <!-- Identificação -->
+    <div class="section">
+      <div class="section-label">&#9632; Identificação</div>
+      <div class="client-box">
+        <div class="field">
+          <label>Nome completo <span class="req">*</span></label>
+          <input type="text" name="cliente_nome" placeholder="Seu nome" required>
+        </div>
+        <div class="field">
+          <label>E-mail <span class="req">*</span></label>
+          <input type="email" name="cliente_email" placeholder="seu@email.com" required>
+        </div>
+        <div class="field">
+          <label>Empresa / Projeto</label>
+          <input type="text" name="empresa" placeholder="Nome atual">
+        </div>
+        <div class="field">
+          <label>Setor</label>
+          <input type="text" name="setor" placeholder="Ex: saúde, moda, tech">
+        </div>
+      </div>
+    </div>
+
+    <!-- Diagnóstico -->
+    <div class="section">
+      <div class="section-label">&#9632; Diagnóstico da identidade atual</div>
+
+      <div class="field">
+        <label>1. Como você descreveria a identidade visual que a empresa tem hoje?</label>
+        <p class="hint">Cores, logo, fontes, estilo gráfico geral — o que existe atualmente?</p>
+        <textarea name="q1_atual" placeholder="Descreva aqui..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>2. O que você definitivamente NÃO quer carregar do visual atual? <span class="req">*</span></label>
+        <textarea name="q2_nao_quer" placeholder="O que precisa ser abandonado ou transformado?" required></textarea>
+      </div>
+
+      <div class="field">
+        <label>3. Existe algum elemento da identidade atual que deve ser preservado?</label>
+        <p class="hint">Uma cor icônica, um símbolo, algo ligado à história da empresa.</p>
+        <textarea name="q3_preservar" placeholder="Ex: nossa cor azul é reconhecida pelos clientes e não pode desaparecer..."></textarea>
+      </div>
+    </div>
+
+    <!-- Personalidade visual -->
+    <div class="section">
+      <div class="section-label">&#9632; Personalidade visual</div>
+
+      <div class="field">
+        <label>4. Onde sua marca se posiciona nesses espectros? (clique para selecionar)</label>
+        <div id="scales-container" style="margin-top:12px;"></div>
+      </div>
+    </div>
+
+    <!-- Cores -->
+    <div class="section">
+      <div class="section-label">&#9632; Cores</div>
+
+      <div class="field">
+        <label>5. Quais famílias de cores mais combinam com a personalidade da marca?</label>
+        <p class="hint">Selecione todas que fazem sentido.</p>
+        <div class="color-palette" id="colorPalette"></div>
+        <input type="hidden" id="colorSelected" name="q5_cores">
+      </div>
+
+      <div class="field">
+        <label>6. Existem cores que JAMAIS devem aparecer na marca? Por quê?</label>
+        <textarea name="q6_cores_nao" placeholder="Ex: nada de vermelho porque remete a um concorrente direto..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>7. A paleta deve ser predominantemente...</label>
+        <div class="options-list">
+          <label class="option-item"><input type="radio" name="q7_paleta" value="Clara / leve (fundos brancos, tons suaves)"> Clara / leve (fundos brancos, tons suaves)</label>
+          <label class="option-item"><input type="radio" name="q7_paleta" value="Escura / densa (fundos escuros, contraste alto)"> Escura / densa (fundos escuros, contraste alto)</label>
+          <label class="option-item"><input type="radio" name="q7_paleta" value="Neutra (preto, branco, cinza com 1 cor de destaque)"> Neutra (preto, branco, cinza com 1 cor de destaque)</label>
+          <label class="option-item"><input type="radio" name="q7_paleta" value="Vibrante / colorida (múltiplas cores fortes)"> Vibrante / colorida (múltiplas cores fortes)</label>
+          <label class="option-item"><input type="radio" name="q7_paleta" value="Terrosa / orgânica (beges, marrons, verdes naturais)"> Terrosa / orgânica (beges, marrons, verdes naturais)</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tipografia e logo -->
+    <div class="section">
+      <div class="section-label">&#9632; Tipografia e logo</div>
+
+      <div class="field">
+        <label>8. Qual estilo de tipografia você visualiza para a marca?</label>
+        <div class="options-list">
+          <label class="option-item"><input type="checkbox" name="q8_tipo" value="Serifada clássica (elegância, tradição — ex: Vogue, Hermès)"> Serifada clássica (elegância, tradição — ex: Vogue, Hermès)</label>
+          <label class="option-item"><input type="checkbox" name="q8_tipo" value="Serifada contemporânea (moderno com personalidade — ex: Zara)"> Serifada contemporânea (moderno com personalidade — ex: Zara)</label>
+          <label class="option-item"><input type="checkbox" name="q8_tipo" value="Sem serifa geométrica (clean, tecnológico — ex: Spotify)"> Sem serifa geométrica (clean, tecnológico — ex: Spotify)</label>
+          <label class="option-item"><input type="checkbox" name="q8_tipo" value="Sem serifa humanista (amigável, acessível — ex: Mailchimp)"> Sem serifa humanista (amigável, acessível — ex: Mailchimp)</label>
+          <label class="option-item"><input type="checkbox" name="q8_tipo" value="Manuscrita / caligrafia (artesanal, intimidade)"> Manuscrita / caligrafia (artesanal, intimidade)</label>
+          <label class="option-item"><input type="checkbox" name="q8_tipo" value="Display / decorativa (impacto, memorabilidade)"> Display / decorativa (impacto, memorabilidade)</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>9. Como você imagina o logo da marca?</label>
+        <div class="options-list">
+          <label class="option-item"><input type="radio" name="q9_logo" value="Só o nome escrito (logotipo / wordmark)"> Só o nome escrito (logotipo / wordmark)</label>
+          <label class="option-item"><input type="radio" name="q9_logo" value="Símbolo + nome juntos"> Símbolo + nome juntos</label>
+          <label class="option-item"><input type="radio" name="q9_logo" value="Símbolo / ícone que funciona sozinho"> Símbolo / ícone que funciona sozinho</label>
+          <label class="option-item"><input type="radio" name="q9_logo" value="Monograma (iniciais estilizadas)"> Monograma (iniciais estilizadas)</label>
+          <label class="option-item"><input type="radio" name="q9_logo" value="Sem preferência — quero ver opções"> Sem preferência — quero ver opções</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>10. O logo precisa funcionar obrigatoriamente em quais formatos?</label>
+        <div class="options-list">
+          <label class="option-item"><input type="checkbox" name="q10_formatos" value="Fundo branco"> Fundo branco</label>
+          <label class="option-item"><input type="checkbox" name="q10_formatos" value="Fundo escuro / colorido"> Fundo escuro / colorido</label>
+          <label class="option-item"><input type="checkbox" name="q10_formatos" value="Bordado / serigrafia em roupas"> Bordado / serigrafia em roupas</label>
+          <label class="option-item"><input type="checkbox" name="q10_formatos" value="Tamanho muito pequeno (favicon, ícone de app)"> Tamanho muito pequeno (favicon, ícone de app)</label>
+          <label class="option-item"><input type="checkbox" name="q10_formatos" value="Sinalização / fachada / banner"> Sinalização / fachada / banner</label>
+          <label class="option-item"><input type="checkbox" name="q10_formatos" value="Preto e branco"> Preto e branco</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Referências -->
+    <div class="section">
+      <div class="section-label">&#9632; Referências visuais</div>
+
+      <div class="field">
+        <label>11. Marcas cujo visual você admira e gostaria de se aproximar <span class="req">*</span></label>
+        <p class="hint">Quanto mais você explicar o porquê, mais útil será. Qualquer setor.</p>
+        <textarea name="q11_admira" placeholder="Ex: gosto do visual da Natura pelo uso de elementos orgânicos e paleta terrosa..." required></textarea>
+      </div>
+
+      <div class="field">
+        <label>12. Marcas cujo visual você definitivamente NÃO quer se aproximar</label>
+        <textarea name="q12_nao_admira" placeholder="Ex: não quero nada que lembre o estilo das redes de fast food..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>13. Você tem referências visuais salvas? Como pretende compartilhar?</label>
+        <div class="options-list">
+          <label class="option-item"><input type="radio" name="q13_ref" value="Tenho board no Pinterest — vou enviar o link"> Tenho board no Pinterest — vou enviar o link</label>
+          <label class="option-item"><input type="radio" name="q13_ref" value="Tenho fotos salvas — vou enviar por WhatsApp/e-mail"> Tenho fotos salvas — vou enviar por WhatsApp/e-mail</label>
+          <label class="option-item"><input type="radio" name="q13_ref" value="Tenho um arquivo (PDF, apresentação) com referências"> Tenho um arquivo (PDF, apresentação) com referências</label>
+          <label class="option-item"><input type="radio" name="q13_ref" value="Não tenho referências organizadas ainda"> Não tenho referências organizadas ainda</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aplicações -->
+    <div class="section">
+      <div class="section-label">&#9632; Aplicações e entregas</div>
+
+      <div class="field">
+        <label>14. Em quais materiais a identidade visual será aplicada?</label>
+        <div class="options-list">
+          <label class="option-item"><input type="checkbox" name="q14_aplicacoes" value="Redes sociais (posts, stories, highlights)"> Redes sociais (posts, stories, highlights)</label>
+          <label class="option-item"><input type="checkbox" name="q14_aplicacoes" value="Site / landing page"> Site / landing page</label>
+          <label class="option-item"><input type="checkbox" name="q14_aplicacoes" value="Cartão de visita"> Cartão de visita</label>
+          <label class="option-item"><input type="checkbox" name="q14_aplicacoes" value="Papelaria (envelope, papel timbrado, pasta)"> Papelaria (envelope, papel timbrado, pasta)</label>
+          <label class="option-item"><input type="checkbox" name="q14_aplicacoes" value="Embalagens / rótulos"> Embalagens / rótulos</label>
+          <label class="option-item"><input type="checkbox" name="q14_aplicacoes" value="Uniformes / roupas"> Uniformes / roupas</label>
+          <label class="option-item"><input type="checkbox" name="q14_aplicacoes" value="Sinalização / fachada / banner"> Sinalização / fachada / banner</label>
+          <label class="option-item"><input type="checkbox" name="q14_aplicacoes" value="Apresentações / pitches"> Apresentações / pitches</label>
+          <label class="option-item"><input type="checkbox" name="q14_aplicacoes" value="Brindes / merch"> Brindes / merch</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>15. Você tem fornecedor ou canal de produção gráfica definido?</label>
+        <p class="hint">Gráfica, confecção, agência de mídia — pode influenciar decisões técnicas.</p>
+        <textarea name="q15_fornecedor" placeholder="Ex: temos gráfica parceira que usa impressão offset, pantone disponível..."></textarea>
+      </div>
+    </div>
+
+    <!-- Expectativas -->
+    <div class="section">
+      <div class="section-label">&#9632; Expectativas e processo</div>
+
+      <div class="field">
+        <label>16. Qual é o prazo ideal para receber as primeiras propostas?</label>
+        <input type="text" name="q16_prazo" placeholder="Ex: precisamos apresentar em evento no dia 15/07...">
+      </div>
+
+      <div class="field">
+        <label>17. Quem participará da aprovação final?</label>
+        <div class="options-list">
+          <label class="option-item"><input type="radio" name="q17_aprovacao" value="Só eu (fundador/a)"> Só eu (fundador/a)</label>
+          <label class="option-item"><input type="radio" name="q17_aprovacao" value="Eu + sócio/a"> Eu + sócio/a</label>
+          <label class="option-item"><input type="radio" name="q17_aprovacao" value="Eu + equipe interna"> Eu + equipe interna</label>
+          <label class="option-item"><input type="radio" name="q17_aprovacao" value="Eu + aprovação de investidor/a ou conselho"> Eu + aprovação de investidor/a ou conselho</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>18. O que tornaria este projeto um sucesso absoluto para você? <span class="req">*</span></label>
+        <textarea name="q18_sucesso" placeholder="O que faria você sentir que valeu cada centavo investido..." required></textarea>
+      </div>
+
+      <div class="field">
+        <label>19. Qual é seu maior medo ou preocupação em relação a este processo?</label>
+        <p class="hint">Honestidade aqui ajuda a evitar surpresas depois.</p>
+        <textarea name="q19_medo" placeholder="Ex: tenho medo de receber algo muito moderno que afaste meus clientes mais antigos..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>20. Há algo mais que gostaria de compartilhar antes de começarmos?</label>
+        <textarea name="q20_extra" placeholder="Observações livres, contexto histórico, curiosidades sobre a empresa..."></textarea>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <p class="submit-note">Suas respostas serão enviadas para o designer responsável pelo projeto.</p>
+      <button type="submit" class="btn-submit" id="submitBtn">Enviar briefing &rarr;</button>
+    </div>
+
+  </form>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ══════════════════════════════════════════════
+  //  SUBSTITUA AQUI SUAS CREDENCIAIS DO EMAILJS
+  // ══════════════════════════════════════════════
+  const EMAILJS_PUBLIC_KEY  = 'BcV2phUqX3Amye0ui';
+  const EMAILJS_SERVICE_ID  = 'service_7x68d3o';
+  const EMAILJS_TEMPLATE_ID = 'i4t3iua';
+  // ══════════════════════════════════════════════
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  // ── Escalas de personalidade ──
+  const scales = [
+    ['Minimalista', 'Maximalista'],
+    ['Sóbrio / formal', 'Descontraído / casual'],
+    ['Atemporal / clássico', 'Contemporâneo / atual'],
+    ['Suave / delicado', 'Forte / impactante'],
+    ['Orgânico / artesanal', 'Digital / tecnológico'],
+  ];
+
+  const scaleValues = {};
+  const scContainer = document.getElementById('scales-container');
+
+  scales.forEach((pair, si) => {
+    scaleValues[si] = null;
+    const wrap = document.createElement('div');
+    wrap.className = 'scale-block';
+
+    const poles = document.createElement('div');
+    poles.className = 'scale-poles';
+    poles.innerHTML = `<span>${pair[0]}</span><span>${pair[1]}</span>`;
+
+    const btns = document.createElement('div');
+    btns.className = 'scale-btns';
+
+    for (let v = 1; v <= 5; v++) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'scale-btn';
+      b.textContent = v;
+      b.addEventListener('click', () => {
+        scaleValues[si] = v;
+        btns.querySelectorAll('.scale-btn').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        updateProgress();
+      });
+      btns.appendChild(b);
+    }
+
+    wrap.appendChild(poles);
+    wrap.appendChild(btns);
+    scContainer.appendChild(wrap);
+  });
+
+  // ── Paleta de cores ──
+  const colors = [
+    { name: 'Azul profundo', hex: '#1a3a5c' },
+    { name: 'Azul céu', hex: '#4a9eda' },
+    { name: 'Verde floresta', hex: '#2d6a4f' },
+    { name: 'Verde menta', hex: '#74c69d' },
+    { name: 'Terracota', hex: '#c1440e' },
+    { name: 'Laranja', hex: '#f4845f' },
+    { name: 'Amarelo mostarda', hex: '#d4a017' },
+    { name: 'Rosa', hex: '#d4536e' },
+    { name: 'Roxo', hex: '#7b5ea7' },
+    { name: 'Preto', hex: '#1a1a1a' },
+    { name: 'Cinza', hex: '#888888' },
+    { name: 'Bege', hex: '#c9a97c' },
+    { name: 'Off-white', hex: '#e8e3d8', border: '#ccc' },
+    { name: 'Dourado', hex: '#b8963e' },
+  ];
+
+  const selectedColors = new Set();
+  const palette = document.getElementById('colorPalette');
+  const colorInput = document.getElementById('colorSelected');
+
+  colors.forEach(c => {
+    const chip = document.createElement('div');
+    chip.className = 'color-chip';
+    chip.style.background = c.hex;
+    if (c.border) chip.style.border = `2px solid ${c.border}`;
+    chip.title = c.name;
+    chip.addEventListener('click', () => {
+      if (selectedColors.has(c.name)) {
+        selectedColors.delete(c.name);
+        chip.classList.remove('selected');
+      } else {
+        selectedColors.add(c.name);
+        chip.classList.add('selected');
+      }
+      colorInput.value = [...selectedColors].join(', ');
+      updateProgress();
+    });
+    palette.appendChild(chip);
+  });
+
+  // ── Progress ──
+  const reqInputs = document.querySelectorAll('[required]');
+  const fill = document.getElementById('fill');
+  const pct = document.getElementById('pct');
+
+  function updateProgress() {
+    let done = 0;
+    reqInputs.forEach(i => { if (i.value.trim()) done++; });
+    const p = Math.round((done / reqInputs.length) * 100);
+    fill.style.width = p + '%';
+    pct.textContent = p + '%';
+  }
+
+  document.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+  // ── Toast ──
+  function showToast(msg, isError) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isError ? ' error' : '');
+    setTimeout(() => { t.className = 'toast'; }, 4500);
+  }
+
+  // ── Build email message ──
+  function buildMessage(form) {
+    const fd = new FormData(form);
+    const lines = ['══ BRIEFING DE IDENTIDADE VISUAL ══\n'];
+
+    const labels = {
+      cliente_nome: 'Nome do cliente',
+      cliente_email: 'E-mail do cliente',
+      empresa: 'Empresa / Projeto',
+      setor: 'Setor',
+      q1_atual: '1. Identidade visual atual',
+      q2_nao_quer: '2. O que não quer preservar',
+      q3_preservar: '3. O que deve ser preservado',
+      q5_cores: '5. Cores selecionadas',
+      q6_cores_nao: '6. Cores a evitar',
+      q7_paleta: '7. Paleta predominante',
+      q9_logo: '9. Formato de logo',
+      q11_admira: '11. Marcas admiradas',
+      q12_nao_admira: '12. Marcas a evitar',
+      q13_ref: '13. Como compartilha referências',
+      q15_fornecedor: '15. Fornecedor gráfico',
+      q16_prazo: '16. Prazo',
+      q17_aprovacao: '17. Quem aprova',
+      q18_sucesso: '18. Definição de sucesso',
+      q19_medo: '19. Medos e preocupações',
+      q20_extra: '20. Observações finais',
+    };
+
+    // Checkboxes múltiplos
+    const multiFields = {};
+    for (const [k, v] of fd.entries()) {
+      const multi = ['q8_tipo', 'q10_formatos', 'q14_aplicacoes'];
+      if (multi.includes(k)) {
+        multiFields[k] = multiFields[k] ? multiFields[k] + ' / ' + v : v;
+      }
+    }
+
+    for (const [key, label] of Object.entries(labels)) {
+      const val = fd.get(key) || '';
+      if (val.trim()) lines.push(`${label}:\n${val}\n`);
+    }
+
+    if (multiFields.q8_tipo) lines.push(`8. Tipografia preferida:\n${multiFields.q8_tipo}\n`);
+    if (multiFields.q10_formatos) lines.push(`10. Formatos de logo:\n${multiFields.q10_formatos}\n`);
+    if (multiFields.q14_aplicacoes) lines.push(`14. Aplicações:\n${multiFields.q14_aplicacoes}\n`);
+
+    // Escalas
+    lines.push('\n4. Escalas de personalidade:');
+    scales.forEach((pair, si) => {
+      if (scaleValues[si] !== null) {
+        lines.push(`  ${pair[0]} ←[${scaleValues[si]}/5]→ ${pair[1]}`);
+      }
+    });
+
+    return lines.join('\n');
+  }
+
+  // ── Submit ──
+  document.getElementById('ivForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const required = this.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(el => {
+      if (!el.value.trim()) { el.style.borderColor = '#c1440e'; valid = false; }
+      else el.style.borderColor = '';
+    });
+
+    if (!valid) {
+      showToast('Preencha os campos obrigatórios marcados com *.', true);
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    const clienteName = this.querySelector('[name="cliente_nome"]').value;
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        subject: `Briefing de Identidade Visual — ${clienteName}`,
+        message: buildMessage(this),
+        reply_to: this.querySelector('[name="cliente_email"]').value,
+      });
+
+      showToast('✓ Briefing enviado com sucesso!');
+      btn.textContent = 'Enviado ✓';
+
+      setTimeout(() => {
+        this.reset();
+        selectedColors.clear();
+        document.querySelectorAll('.color-chip').forEach(c => c.classList.remove('selected'));
+        Object.keys(scaleValues).forEach(k => { scaleValues[k] = null; });
+        document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+        btn.disabled = false;
+        btn.innerHTML = 'Enviar briefing &rarr;';
+        fill.style.width = '0%';
+        pct.textContent = '0%';
+      }, 3000);
+
+    } catch (err) {
+      console.error(err);
+      showToast('Erro ao enviar. Verifique suas credenciais EmailJS.', true);
+      btn.disabled = false;
+      btn.innerHTML = 'Tentar novamente &rarr;';
+    }
+  });
+</script>
+</body>
+</html>
